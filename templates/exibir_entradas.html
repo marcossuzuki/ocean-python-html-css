@@ -1,0 +1,42 @@
+{% extends 'layout.html' %}
+
+{% block corpo %}
+{% if session.logado %}
+    <form method="POST" action="{{ url_for('inserir_entrada') }}" class="ins-entrada">
+        <dl>
+            <dt>Título</dt>
+            <dd><input type="text" size="30" name="titulo"/></dd>
+            <dt>Texto:</dt>
+            <dd><textarea rows="5" cols="40" name="texto"></textarea></dd>
+            <dd><input type="submit" value="Publicar"/></dd>
+        </dl>
+    </form>
+{% endif %}
+
+<ul class="entradas">
+    {% for entrada in entradas %}
+    
+    <div class="row">
+        <div class="col s12 m6">
+          <div class="mdc-card">
+            <div class="card-content white-text">
+              <span class="card-title">{{ entrada.titulo }}</span>
+              <li>
+                <p>{{ entrada.texto }}</p>
+            </li>
+            </div>
+            <div class="card-action">
+              <a href="#">This is a link</a>
+              <a href="#">This is a link</a>
+            </div>
+          </div>
+        </div>
+    </div>
+
+
+    {% else %}
+    <li><em>Você ainda não possui entradas no seu Blog</em></li>
+    {% endfor %}
+</ul>
+
+{% endblock %}
